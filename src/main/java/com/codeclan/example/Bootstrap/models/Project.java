@@ -1,6 +1,6 @@
 package com.codeclan.example.Bootstrap.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,24 +20,19 @@ public class Project {
     @Column
     private int duration;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("projects")
     @ManyToMany
-    @JoinTable(
-            name = "projects_employees",
-            joinColumns = {
-                    @JoinColumn(
+    @JoinTable(name = "projects_employees",
+                joinColumns = { @JoinColumn(
                      name = "project_id",
                      nullable = false,
-                     updatable = false
-                    )
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(
+                     updatable = false)
+                },
+                inverseJoinColumns = { @JoinColumn(
                             name = "employee_id",
                             nullable = false,
-                            updatable = false
-                    )
-            })
+                            updatable = false)
+                })
     private List<Employee> employees;
 
     public Project(String name, int duration) {

@@ -29,22 +29,18 @@ public class Employee {
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("employees")
     @ManyToMany
     @JoinTable(name = "projects_employees",
-                joinColumns = {
-                    @JoinColumn(
+                joinColumns = { @JoinColumn(
                             name = "employee_id",
                             nullable = false,
-                            updatable = false
-                    )
+                            updatable = false)
                 },
-                inverseJoinColumns = {
-                    @JoinColumn(
+                inverseJoinColumns = { @JoinColumn(
                             name = "project_id",
                             nullable = false,
-                            updatable = false
-                    )
+                            updatable = false)
                 })
     private List<Project> projects;
 
